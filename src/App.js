@@ -52,18 +52,18 @@ function App() {
           element={
             <>
               {isLoading ? (
-                <div 
-                  className="loaderContainer"> 
+                <div
+                  className="loaderContainer">
                 </div>
-          ) : (
-            <div className={styles.app}>
+              ) : (
+                <div className={styles.app}>
 
-            <div>
-              <h1 className={styles.heading}>Todo List</h1>
-              <AddTodoForm onAddTodo={addTodo} />
-            </div>
-            <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
-             </div>
+                  <div>
+                    <h1 className={styles.heading}>Todo List</h1>
+                    <AddTodoForm onAddTodo={addTodo} />
+                  </div>
+                  <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+                </div>
               )}
             </>
           }
