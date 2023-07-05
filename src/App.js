@@ -35,7 +35,9 @@ function App() {
   }, [todoList, isLoading]);
 
   const addTodo = (newTodo) => {
-    setTodoList([...todoList, newTodo])
+    //newTodoAirtableFormat is quick fix for submitting todo, need to send post request on addtodo and update todolist with whats returned from it
+    const newTodoAirtableFormat = { id: newTodo.id, fields: { Title: newTodo.title }}
+    setTodoList([...todoList, newTodoAirtableFormat])
   };
 
   const removeTodo = (id) => {
