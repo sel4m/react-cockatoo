@@ -22,7 +22,15 @@ function App() {
       .then((response) => response.json())
 
       .then((result) => {
-        setTodoList(result.records);
+        // setTodoList(result.records);
+        const todos = result.records.map((todo) => {
+          const newTodoAirtableFormat = {
+            id: todo.id,
+            title: todo.fields.Title,
+          }
+          return newTodoAirtableFormat
+        });
+        setTodoList(todos);
         setIsLoading(false);
       })
       .catch((error) => console.warn(error));
@@ -34,16 +42,77 @@ function App() {
     }
   }, [todoList, isLoading]);
 
-  const addTodo = (newTodo) => {
-    //newTodoAirtableFormat is quick fix for submitting todo, need to send post request on addtodo and update todolist with whats returned from it
-    const newTodoAirtableFormat = { id: newTodo.id, fields: { Title: newTodo.title }}
-    setTodoList([...todoList, newTodoAirtableFormat])
+  const addTodo = async (title) => {
+    try {
+      const airtableData = {
+        fields: {
+          Title: title,
+        },
+      };
+
+      const response = await fetch(
+        url,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+          },
+          body: JSON.stringify(airtableData),
+        }
+
+      );
+
+      if (!response.ok) {
+        const message = `Error has ocurred:
+                               ${response.status}`;
+        throw new Error(message);
+      }
+
+      const dataResponse = await response.json();
+      console.log(dataResponse);
+      //newTodoAirtableFormat is quick fix for submitting todo, need to send post request on addtodo and update todolist with whats returned from it
+      //const newTodoAirtableFormat = { id: dataResponse.id, fields: { Title: dataResponse.title }}
+      const newTodoAirtableFormat = {
+        id: dataResponse.id,
+        title: dataResponse.fields.Title,
+      };
+      setTodoList([...todoList, newTodoAirtableFormat])
+      console.log(todoList);
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
   };
 
-  const removeTodo = (id) => {
-    const newTodoList = todoList.filter((todo) => todo.id !== id);
-    setTodoList(newTodoList);
+
+
+  const removeTodo = async (id) => {
+    //const newTodoList = todoList.filter((todo) => todo.id !== id);
+    // setTodoList(newTodoList);
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default/${id}`;
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+      },
+    };
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        const message = `Error has occurred:
+                ${response.status}`;
+        throw new Error(message);
+      }
+      const newTodoList = todoList.filter((todo) => todo.id !== id);
+      setTodoList(newTodoList);
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
   };
+
   return (
 
     <BrowserRouter>
