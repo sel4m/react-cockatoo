@@ -6,12 +6,8 @@ import PropTypes from 'prop-types'
 
 
 function TodoList({ todoList, onRemoveTodo }) {
-    //console.log("todoList", todoList);
-    //console.log(todoList[0]["fields"]["Title"]);
-    //console.log(todoList[1]["fields"]["Title"]);
-    //console.log(todoList[2]["fields"]["Title"]);
     return (
-        
+
         <ul>
             {todoList.map((item) => {
                 console.log(item);
@@ -21,11 +17,8 @@ function TodoList({ todoList, onRemoveTodo }) {
                         key={item.id}
                         id={item.id}
                         title={item.title}
-    
-                        //title="temporary"
-                
                     />
-                     
+
                 );
             })}
         </ul>

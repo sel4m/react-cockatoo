@@ -12,13 +12,13 @@ function AddTodoForm({ onAddTodo }) {
 
     const handleAddTodo = (event) => {
         event.preventDefault();
-        if(todoTitle === "" || todoTitle === " ") {
+        if (todoTitle === "" || todoTitle === " ") {
             alert("Empty form submission, please input title")
         } else {
-        //onAddTodo({ title: todoTitle, id: Date.now() });
-        onAddTodo(todoTitle);
-        setTodoTitle("");
-    }};
+            onAddTodo(todoTitle);
+            setTodoTitle("");
+        }
+    };
     return (
         <div>
             <form onSubmit={handleAddTodo}>
