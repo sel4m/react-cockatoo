@@ -22,7 +22,6 @@ function App() {
       .then((response) => response.json())
 
       .then((result) => {
-        // setTodoList(result.records);
         const todos = result.records.map((todo) => {
           const newTodoAirtableFormat = {
             id: todo.id,
@@ -71,8 +70,6 @@ function App() {
 
       const dataResponse = await response.json();
       console.log(dataResponse);
-      //newTodoAirtableFormat is quick fix for submitting todo, need to send post request on addtodo and update todolist with whats returned from it
-      //const newTodoAirtableFormat = { id: dataResponse.id, fields: { Title: dataResponse.title }}
       const newTodoAirtableFormat = {
         id: dataResponse.id,
         title: dataResponse.fields.Title,
@@ -88,8 +85,6 @@ function App() {
 
 
   const removeTodo = async (id) => {
-    //const newTodoList = todoList.filter((todo) => todo.id !== id);
-    // setTodoList(newTodoList);
     const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default/${id}`;
     const options = {
       method: "DELETE",

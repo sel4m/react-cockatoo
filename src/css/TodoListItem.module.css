@@ -1,5 +1,5 @@
 .ListItem {
-    color: rgb(42, 6, 58);
+    color: rgb(187, 115, 153);
     list-style-type: none;
     margin: 15px 0;
     font-size: 1.25rem;
@@ -7,7 +7,7 @@
 
 .app {
     text-align: center;
-    border: 5px solid rgb(42, 6, 58);
+    border: 5px solid rgb(171, 149, 186);
     border-radius: 10px;
     max-width: fit-content;
     display: flex;
@@ -16,31 +16,31 @@
 }
 
 .heading {
-    color: rgb(42, 6, 58);
+    color: rgb(187, 115, 153);
     font-size: 3.5rem;
     font-weight: 500;
     line-height: 40px;
 }
 
-
 form button {
-    background-color: rgb(70, 29, 69);
-    color: rgb(207, 192, 215);
+    background-color: rgb(187, 115, 153);
+    color: rgb(0, 0, 0);
     border-radius: 10px;
+    border-color: rgb(171, 149, 186);
     font-size: 1rem;
 }
 
 input {
     border-radius: 10px;
-    background-color: rgb(240, 218, 240);
+    background-color: rgb(192, 158, 192);
     font-size: 1rem;
 }
 
 li button {
     margin-left: 10px;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255);
-    border-color: #4f0f4b;
+    background-color: rgb(171, 149, 186);
+    border-color: rgb(187, 115, 153);
 }
 
 @media screen and (max-width: 726px) {
@@ -49,9 +49,4 @@ li button {
         display: block;
         max-width: 615px;
     }
-/* 
-    li button {
-        margin-left: 1;
-    } */
-
 }

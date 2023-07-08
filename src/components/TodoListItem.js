@@ -3,12 +3,12 @@ import style from '../css/TodoListItem.module.css';
 import PropTypes from 'prop-types';
 
 
-function TodoListItem({ id, title, onRemoveTodo }) {  
+function TodoListItem({ id, title, onRemoveTodo }) {
     console.log(title);
     return (
-        <li className={style.ListItem} key={id}>  {/* delete key here? and id two lines up next to TodoListItem function? */}
+        <li className={style.ListItem}>
             {title}
-          <button onClick={() => onRemoveTodo(id)}>Remove</button>  
+            <button onClick={() => onRemoveTodo(id)}>Remove</button>
         </li>
     )
 }
